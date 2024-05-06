@@ -1,0 +1,21 @@
+import {
+  core.text {intercalate, join},
+}
+
+data header {
+| Header(
+    key: text,
+    value: text,
+  )
+}
+
+define show-header(h: header): text {
+  let Header of {key, value} = h in
+  join([key, *": ", value])
+}
+
+define show-header-list(hs: list(header)): text {
+  let ts = map(show-header, hs) in
+  let k = intercalate(*"\r\n", ts) in
+  join([k, *"\r\n"])
+}

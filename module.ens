@@ -1,0 +1,40 @@
+{
+  target {
+    test "test.nt",
+  },
+  dependency {
+    core {
+      digest "LpSn6ST-EcDicu4U4atrHU28QCFdMRJRku4fAtCWVBg",
+      mirror [
+        "https://github.com/vekatze/neut-core/raw/main/archive/0-48-1.tar.zst",
+      ],
+      enable-preset true,
+    },
+    socket {
+      digest "I28yS3cHzGgDDm-AncY0eruyZVNh2qxNqKIrhPZxI-0",
+      mirror [
+        "https://github.com/vekatze/socket-nt/raw/main/archive/0-3-3.tar.zst",
+      ],
+      enable-preset false,
+    },
+    noa {
+      digest "gMuH77pcjRxOvPVsjt-mt3yZmFhlFYIGsz_dvcieR7g",
+      mirror [
+        "https://github.com/vekatze/noa/raw/main/archive/0-3-1.tar.zst",
+      ],
+    },
+    zonk {
+      digest "t_-7gnohB-7pvKT3_pgrqWwdS9l4Uv2vEufsW1YB4P8",
+      mirror [
+        "https://github.com/vekatze/zonk/raw/main/archive/0-1-2.tar.zst",
+      ],
+      enable-preset false,
+    },
+    ansi {
+      digest "WRSADDYAdeSrlq6XpR_wHKO43AyEie6wNanqq8eMWoY",
+      mirror [
+        "https://github.com/vekatze/ansi-terminal/raw/main/archive/0-4-0.tar.zst",
+      ],
+    },
+  },
+}

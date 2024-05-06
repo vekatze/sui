@@ -1,0 +1,130 @@
+import {
+  core.rune.entity,
+  core.text.entity {eq-text},
+  this.entity.header {Header, header},
+  this.entity.request {Request, request},
+  this.entity.request-method {DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT, TRACE, UNKNOWN, request-method},
+  zonk.parser {chunk, drop-while, many, not-followed-by, parser, return, run, take-while, zonk},
+  zonk.state {new-state},
+}
+
+define _is-space(r: rune): bool {
+  if core.rune.entity.as-entity::identity(r, 0x20) {
+    True
+  } else-if ule-int32(sub-int32(r, 0x9), 0x4) {
+    True
+  } else {
+    False
+  }
+}
+
+define _is-colon(r: rune): bool {
+  core.rune.entity.as-entity::identity(r, 0x3a)
+}
+
+constant _skip-space: parser(unit) {
+  drop-while(_is-space)
+}
+
+define _symbol(): parser(text) {
+  take-while(compose(_is-space, not))
+}
+
+define _http-line-break(): parser(unit) {
+  chunk("\r\n")
+}
+
+define _request-method(): parser(request-method) {
+  with zonk {
+    bind method-text = _symbol() in
+    let method on method-text =
+      if eq-text(method-text, "GET") {
+        GET
+      } else-if eq-text(method-text, "HEAD") {
+        HEAD
+      } else-if eq-text(method-text, "POST") {
+        POST
+      } else-if eq-text(method-text, "PUT") {
+        PUT
+      } else-if eq-text(method-text, "DELETE") {
+        DELETE
+      } else-if eq-text(method-text, "OPTIONS") {
+        OPTIONS
+      } else-if eq-text(method-text, "TRACE") {
+        TRACE
+      } else-if eq-text(method-text, "PATCH") {
+        PATCH
+      } else {
+        UNKNOWN
+      }
+    in
+    let _ = method-text in
+    return(method)
+  }
+}
+
+define _http-header(): parser(header) {
+  with zonk {
+    bind _ = not-followed-by(chunk("\r")) in
+    bind key = take-while(compose(_is-colon, not)) in
+    bind _ = chunk(":") in
+    bind _ = _skip-space in
+    bind value = _symbol() in
+    bind _ = _http-line-break() in
+    return(Header of {key, value})
+  }
+}
+
+define _http-header-blank-line(): parser(list(header)) {
+  with zonk {
+    bind _ = _http-line-break() in
+    return([])
+  }
+}
+
+define _http-header-list(): parser(list(header)) {
+  many(_http-header())
+}
+
+define _read-all(): parser(text) {
+  take-while(function (_) {
+    True
+  })
+}
+
+define _request(): parser(request) {
+  with zonk {
+    bind method = _request-method() in
+    bind _ = _skip-space in
+    bind path = _symbol() in
+    bind _ = _skip-space in
+    bind protocol-version = _symbol() in
+    bind _ = _http-line-break() in
+    bind headers = _http-header-list() in
+    bind _ = _http-line-break() in
+    bind body = _read-all() in
+    return(
+      Request of {
+        method,
+        path,
+        protocol-version,
+        headers,
+        body,
+      },
+    )
+  }
+}
+
+define parse-request(t: text): ?request {
+  let st = new-state(t) in
+  let result on st =
+    match run(_request(), st) {
+    | Pass(r) =>
+      Pass(r)
+    | Fail(_) =>
+      Fail(Unit)
+    }
+  in
+  let _ = st in
+  result
+}

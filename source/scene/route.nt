@@ -1,0 +1,70 @@
+import {
+  core.errno {Errno, errno},
+  core.text {_from-c-string},
+  noa.utils {_print-green-bold},
+  socket.address-family,
+  socket.socket {Socket-Address, socket-address, start-server},
+  socket.socket-type {SOCK_STREAM},
+  this.entity.request {request},
+  this.entity.response {response, show-response, text-response},
+  this.scene.parse-request {parse-request},
+}
+
+data server {
+| Server(
+    address: &text,
+    number-of-threads: int,
+    port: int16,
+    act: (&request) -> response,
+  )
+}
+
+inline _run(act: (&request) -> response): (address: socket-address, text) -> text {
+  function (address: socket-address, t: text) {
+    let Socket-Address of {ip-address, port} = address in
+    _print-green-bold("INFO: ");
+    printf("{}:{}\n", [ip-address, %ld(magic cast(_, _, port))]);
+    let req-or-none = parse-request(t) in
+    match req-or-none {
+    | Pass(req) =>
+      let result on req = act(req) in
+      let _ = req in
+      show-response(result)
+    | Fail(_) =>
+      show-response(text-response(400, *"The server couldn't parse the request\n"))
+    }
+  }
+}
+
+foreign {
+  strerror(int): pointer,
+}
+
+define _errno-to-text(e: errno): text {
+  let Errno(i) = e in
+  let c-str = magic external strerror(i) in
+  _from-c-string(c-str)
+}
+
+inline serve(s: server): unit {
+  let Server of {address, number-of-threads, port, act} = s in
+  let server-config =
+    socket.socket.Config of {
+      family = socket.address-family.AF_INET,
+      comm-type = SOCK_STREAM,
+      reuse-socket = True,
+      protocol = 0,
+      port,
+      address,
+      backlog = 128,
+      threads = number-of-threads,
+      interpreter = _run(act),
+    }
+  in
+  match start-server(server-config) {
+  | Fail(Errno(i)) =>
+    printf("failed to start a server.\nerror: {} {}\n", [%ld(i), _errno-to-text(Errno(i))])
+  | Pass(_) =>
+    Unit
+  }
+}
