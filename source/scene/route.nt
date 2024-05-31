@@ -26,11 +26,11 @@ inline _run(act: (&request) -> response): (address: socket-address, text) -> tex
     printf("{}:{}\n", [ip-address, %ld(magic cast(_, _, port))]);
     let req-or-none = parse-request(t) in
     match req-or-none {
-    | Pass(req) =>
+    | Right(req) =>
       let result on req = act(req) in
       let _ = req in
       show-response(result)
-    | Fail(_) =>
+    | Left(_) =>
       show-response(text-response(400, *"The server couldn't parse the request\n"))
     }
   }
@@ -62,9 +62,9 @@ inline serve(s: server): unit {
     }
   in
   match start-server(server-config) {
-  | Fail(Errno(i)) =>
+  | Left(Errno(i)) =>
     printf("failed to start a server.\nerror: {} {}\n", [%ld(i), _errno-to-text(Errno(i))])
-  | Pass(_) =>
+  | Right(_) =>
     Unit
   }
 }

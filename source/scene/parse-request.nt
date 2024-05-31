@@ -9,9 +9,9 @@ import {
 }
 
 define _is-space(r: rune): bool {
-  if core.rune.entity.as-entity::identity(r, 0x20) {
+  if core.rune.entity.as-entity::identity(r, ` `) {
     True
-  } else-if ule-int32(sub-int32(r, 0x9), 0x4) {
+  } else-if ule-int32(sub-int32(magic cast(rune, int32, r), 0x9), 0x4) {
     True
   } else {
     False
@@ -19,7 +19,7 @@ define _is-space(r: rune): bool {
 }
 
 define _is-colon(r: rune): bool {
-  core.rune.entity.as-entity::identity(r, 0x3a)
+  core.rune.entity.as-entity::identity(r, `:`)
 }
 
 constant _skip-space: parser(unit) {
@@ -27,7 +27,7 @@ constant _skip-space: parser(unit) {
 }
 
 define _symbol(): parser(text) {
-  take-while(compose(_is-space, not))
+  take-while(compose(not, _is-space))
 }
 
 define _http-line-break(): parser(unit) {
@@ -66,7 +66,7 @@ define _request-method(): parser(request-method) {
 define _http-header(): parser(header) {
   with zonk {
     bind _ = not-followed-by(chunk("\r")) in
-    bind key = take-while(compose(_is-colon, not)) in
+    bind key = take-while(compose(not, _is-colon)) in
     bind _ = chunk(":") in
     bind _ = _skip-space in
     bind value = _symbol() in
@@ -119,10 +119,10 @@ define parse-request(t: text): ?request {
   let st = new-state(t) in
   let result on st =
     match run(_request(), st) {
-    | Pass(r) =>
-      Pass(r)
-    | Fail(_) =>
-      Fail(Unit)
+    | Right(r) =>
+      Right(r)
+    | Left(_) =>
+      Left(Unit)
     }
   in
   let _ = st in
