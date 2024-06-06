@@ -6,39 +6,35 @@
   },
   dependency {
     core {
-      digest "H-2HpftmHaiWaNgT4vJhKEBKNqhbxqfKSgf0CAHt8LI",
+      digest "5eWe_Runvo_wXtLvDa9MVH2tMWKVR3kuJgoBEJwG6hQ",
       mirror [
-        "https://github.com/vekatze/neut-core/raw/main/archive/0-49-1.tar.zst",
+        "https://github.com/vekatze/neut-core/raw/main/archive/0-49-3.tar.zst",
       ],
       enable-preset true,
     },
     socket {
-      digest "G9OcjHe8FkM9AV9dv2pOgjhVNlqH2kmBXivSSIUZDtM",
+      digest "317YDqXHN2x_C8KguS7e_SwFtZQdpe7rUEPlesiFOmE",
       mirror [
-        "https://github.com/vekatze/socket-nt/raw/main/archive/0-3-6.tar.zst",
+        "https://github.com/vekatze/socket-nt/raw/main/archive/0-3-7.tar.zst",
       ],
-      enable-preset false,
     },
     noa {
-      digest "C2mln6AMNy5fmwjI_fgIFpPV9-s-69up1OtrjoDSi1A",
+      digest "gxiWZ1Kf7bjrKgFJUQh6NabKuE302QKtdOUChlvWW7A",
       mirror [
-        "https://github.com/vekatze/noa/raw/main/archive/0-3-6.tar.zst",
+        "https://github.com/vekatze/noa/raw/main/archive/0-3-7.tar.zst",
       ],
-      enable-preset false,
     },
     zonk {
-      digest "LxXL0VDc0rtzjYSBKxEtOS0jwF6hid7RNnik9xjEhTE",
+      digest "0JrACJiaQRGkUV-K_q1NhvaLwHiCfgG_BbzVOquj6Xk",
       mirror [
-        "https://github.com/vekatze/zonk/raw/main/archive/0-1-5.tar.zst",
+        "https://github.com/vekatze/zonk/raw/main/archive/0-1-6.tar.zst",
       ],
-      enable-preset false,
     },
     ansi {
-      digest "-rOEErcm7bsxfXl7m5iJ6GqY4dmASTMWwbpcdoLilus",
+      digest "DLMCyBI4azKhwnNAK2CUzC5FjCd9a4n_nW6ZGh4ipws",
       mirror [
-        "https://github.com/vekatze/ansi-terminal/raw/main/archive/0-4-4.tar.zst",
+        "https://github.com/vekatze/ansi-terminal/raw/main/archive/0-4-5.tar.zst",
       ],
-      enable-preset false,
     },
   },
 }

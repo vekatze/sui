@@ -35,8 +35,8 @@ define get-status-code-text(code: int): &text {
   }
 }
 
-define show-response(r: response): text {
-  let Response of {protocol-version, status-code, headers, body} = r in
+define show-response(resp: response): text {
+  let Response of {protocol-version, status-code, headers, body} = resp in
   join([
     protocol-version,
     *" ",
