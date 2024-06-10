@@ -6,9 +6,9 @@
   },
   dependency {
     core {
-      digest "5eWe_Runvo_wXtLvDa9MVH2tMWKVR3kuJgoBEJwG6hQ",
+      digest "KuZ68pSgCFb-NdOPtLbX9bBOSN2ls3XNqgOFDSwJrDs",
       mirror [
-        "https://github.com/vekatze/neut-core/raw/main/archive/0-49-3.tar.zst",
+        "https://github.com/vekatze/neut-core/raw/main/archive/0-49-9.tar.zst",
       ],
       enable-preset true,
     },
@@ -19,21 +19,21 @@
       ],
     },
     noa {
-      digest "gxiWZ1Kf7bjrKgFJUQh6NabKuE302QKtdOUChlvWW7A",
+      digest "9aSnEW1NJy9HRGYmEe6bgVw2o4VLYEcI-gy8OsHaRIQ",
       mirror [
-        "https://github.com/vekatze/noa/raw/main/archive/0-3-7.tar.zst",
+        "https://github.com/vekatze/noa/raw/main/archive/0-3-9.tar.zst",
       ],
     },
     zonk {
-      digest "0JrACJiaQRGkUV-K_q1NhvaLwHiCfgG_BbzVOquj6Xk",
+      digest "caFMiuXcdGAlgVauZEe9HEpNlPPIE0AyDOEZkJRefB8",
       mirror [
-        "https://github.com/vekatze/zonk/raw/main/archive/0-1-6.tar.zst",
+        "https://github.com/vekatze/zonk/raw/main/archive/0-1-8.tar.zst",
       ],
     },
     ansi {
-      digest "DLMCyBI4azKhwnNAK2CUzC5FjCd9a4n_nW6ZGh4ipws",
+      digest "oIiB4prJOZwJVH8roXLJ0O55tnEHZfovzhQzRe9MmgQ",
       mirror [
-        "https://github.com/vekatze/ansi-terminal/raw/main/archive/0-4-5.tar.zst",
+        "https://github.com/vekatze/ansi-terminal/raw/main/archive/0-4-6.tar.zst",
       ],
     },
   },
