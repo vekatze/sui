@@ -1,6 +1,4 @@
 import {
-  core.rune.entity,
-  core.text.entity {eq-text},
   this.entity.header {Header, header},
   this.entity.request {Request, request},
   this.entity.request-method {DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT, TRACE, UNKNOWN, request-method},
@@ -9,7 +7,7 @@ import {
 }
 
 define _is-space(r: rune): bool {
-  if core.rune.entity.as-entity::identity(r, ` `) {
+  if eq-rune(r, ` `) {
     True
   } else-if ule-int32(sub-int32(magic cast(rune, int32, r), 0x9), 0x4) {
     True
@@ -19,7 +17,7 @@ define _is-space(r: rune): bool {
 }
 
 define _is-colon(r: rune): bool {
-  core.rune.entity.as-entity::identity(r, `:`)
+  eq-rune(r, `:`)
 }
 
 constant _skip-space: parser(unit) {
