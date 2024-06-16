@@ -1,13 +1,16 @@
 import {
   core.errno {Errno, errno},
   core.text {_from-c-string},
+  http-base.request {request},
+  http-base.request.parse.v1-1 {request-parser},
+  http-base.response {response, text-response},
+  http-base.response.show.v1-1 {show-response},
   noa.utils {_print-green-bold},
   socket.address-family,
   socket.socket {Socket-Address, socket-address, start-server},
   socket.socket-type {SOCK_STREAM},
-  this.entity.request {request},
-  this.entity.response {response, show-response, text-response},
-  this.scene.parse-request {parse-request},
+  zonk.parser {run},
+  zonk.state {new-state},
 }
 
 data server {
@@ -15,20 +18,20 @@ data server {
     address: &text,
     number-of-threads: int,
     port: int16,
-    act: (&request) -> response,
+    act: (request) -> response,
   )
 }
 
-inline _run(act: (&request) -> response): (address: socket-address, text) -> text {
+inline _run(act: (request) -> response): (address: socket-address, text) -> text {
   function (address: socket-address, t: text) {
     let Socket-Address of {ip-address, port} = address in
     _print-green-bold("INFO: ");
     printf("{}:{}\n", [ip-address, %ld(magic cast(_, _, port))]);
-    let req-or-none = parse-request(t) in
-    match req-or-none {
+    pin st = new-state(t) in
+    match run(request-parser(), st) {
     | Right(req) =>
-      let result on req = act(req) in
-      let _ = req in
+      let result = act(req) in
+      // let _ = req in
       show-response(result)
     | Left(_) =>
       show-response(text-response(400, *"The server couldn't parse the request\n"))

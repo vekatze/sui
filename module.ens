@@ -36,5 +36,11 @@
         "https://github.com/vekatze/ansi-terminal/raw/main/archive/0-4-8.tar.zst",
       ],
     },
+    http-base {
+      digest "xCa--nSfYEa-92Di94Ix4zW2vcC7sMyhHjkwI-XB3mo",
+      mirror [
+        "https://github.com/vekatze/http-base-nt/raw/main/archive/0-1-0.tar.zst",
+      ],
+    },
   },
 }

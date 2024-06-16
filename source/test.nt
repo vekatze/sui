@@ -1,8 +1,8 @@
 import {
   core.text {format, text-byte-length},
-  this.entity.request {Request, request},
-  this.entity.response {response, text-response},
-  this.scene.route {Server, serve, server},
+  http-base.request {Request, request},
+  http-base.response {response, text-response},
+  this.server {Server, serve, server},
 }
 
 constant my-server: server {
@@ -11,8 +11,9 @@ constant my-server: server {
     number-of-threads = 10,
     port = 8000,
     act = {
-      function (r: &request): response {
-        tie Request of {body} = r in
+      function (r: request): response {
+        let Request of {body} = r in
+        pin body = body in
         let body-len = text-byte-length(body) in
         text-response(200, format("{\"body-byte-length\": {}}", [%ld(body-len)]))
       }
