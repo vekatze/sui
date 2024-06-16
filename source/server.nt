@@ -31,7 +31,6 @@ inline _run(act: (request) -> response): (address: socket-address, text) -> text
     match run(request-parser(), st) {
     | Right(req) =>
       let result = act(req) in
-      // let _ = req in
       show-response(result)
     | Left(_) =>
       show-response(text-response(400, *"The server couldn't parse the request\n"))
