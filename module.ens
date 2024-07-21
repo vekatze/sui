@@ -19,15 +19,15 @@
       ],
     },
     noa {
-      digest "tD3YBT4UDBCtdCttK_QztfWLuA0JsIzQmyb36dVdQuo",
+      digest "tQCwrSmnGlmT25WcZiis1jTxDNhJZVOfAg78f9Vk_Uk",
       mirror [
-        "https://github.com/vekatze/noa/raw/main/archive/0-3-16.tar.zst",
+        "https://github.com/vekatze/noa/raw/main/archive/0-3-17.tar.zst",
       ],
     },
     zonk {
-      digest "SOgzy0iQvJzd0Ke6B5LwCto-yO8i7fkfGCtZdFg_Ua8",
+      digest "qIK2zd5bRsWzSL0Z-dq0VNEHzeGNuFQP-HsgKctdgGw",
       mirror [
-        "https://github.com/vekatze/zonk/raw/main/archive/0-1-16.tar.zst",
+        "https://github.com/vekatze/zonk/raw/main/archive/0-1-17.tar.zst",
       ],
     },
     ansi {
@@ -37,9 +37,9 @@
       ],
     },
     http-base {
-      digest "wPKJdaMZDpNlN0tmqEq5krnytgSPUtYRj-F5SjFpBEI",
+      digest "_A2WvXnzDWp-bLEaVpD1WwV0dOniP2OI4VQAOQvVfSc",
       mirror [
-        "https://github.com/vekatze/http-base-nt/raw/main/archive/0-1-5.tar.zst",
+        "https://github.com/vekatze/http-base-nt/raw/main/archive/0-1-6.tar.zst",
       ],
     },
   },
