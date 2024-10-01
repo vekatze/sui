@@ -1,6 +1,7 @@
 import {
+  core.c-string {from-c-string},
   core.errno {Errno, errno},
-  core.text {_from-c-string},
+  core.int.show {show-int},
   http-base.request {request},
   http-base.request.parse.v1-1 {request-parser},
   http-base.response {response, text-response},
@@ -26,7 +27,7 @@ inline _run(act: (request) -> response): (address: socket-address, text) -> text
   function (address: socket-address, t: text) {
     let Socket-Address of {ip-address, port} = address in
     _print-green-bold("INFO: ");
-    printf("{}:{}\n", [ip-address, %ld(magic cast(_, _, port))]);
+    printf("{}:{}\n", [ip-address, show-int(magic cast(_, _, port))]);
     pin st = new-state(t) in
     match run(request-parser(), st) {
     | Right(req) =>
@@ -45,7 +46,7 @@ foreign {
 define _errno-to-text(e: errno): text {
   let Errno(i) = e in
   let c-str = magic external strerror(i) in
-  _from-c-string(c-str)
+  from-c-string(c-str)
 }
 
 inline serve(s: server): unit {
@@ -65,7 +66,7 @@ inline serve(s: server): unit {
   in
   match start-server(server-config) {
   | Left(Errno(i)) =>
-    printf("failed to start a server.\nerror: {} {}\n", [%ld(i), _errno-to-text(Errno(i))])
+    printf("failed to start a server.\nerror: {} {}\n", [show-int(i), _errno-to-text(Errno(i))])
   | Right(_) =>
     Unit
   }

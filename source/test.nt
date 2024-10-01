@@ -1,4 +1,5 @@
 import {
+  core.int.show {show-int},
   core.text {format, text-byte-length},
   http-base.request {Request, request},
   http-base.response {response, text-response},
@@ -15,7 +16,7 @@ constant my-server: server {
         let Request of {body} = r in
         pin body = body in
         let body-len = text-byte-length(body) in
-        text-response(200, format("{\"body-byte-length\": {}}", [%ld(body-len)]))
+        text-response(200, format("{\"body-byte-length\": {}}", [show-int(body-len)]))
       }
     },
   }
