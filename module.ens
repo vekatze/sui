@@ -13,9 +13,9 @@
       enable-preset true,
     },
     socket {
-      digest "9XPxVWnsEUdRms85gB72jf-SvxZjiQXnCPYGo8qBS30",
+      digest "hDESKQpXzo8wxSO3kukF2edh39T6CuGYZDGkxslO2dE",
       mirror [
-        "https://github.com/vekatze/socket-nt/raw/main/archive/0-3-17.tar.zst",
+        "https://github.com/vekatze/socket-nt/raw/main/archive/0-3-18.tar.zst",
       ],
     },
     noa {
