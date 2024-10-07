@@ -3,6 +3,12 @@
 `sui` is a HTTP server for Neut.
 
 ```sh
+neut get sui https://github.com/vekatze/sui/raw/main/archive/0-1-18.tar.zst
+```
+
+## Exampl
+
+```sh
 # see source/test.nt
 neut build --execute
 
