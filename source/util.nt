@@ -1,0 +1,11 @@
+import {
+  ansi.color {Green, set-foreground-color},
+  ansi.style {Bold, Normal, set-style},
+}
+
+define _print-green-bold(t: &text): unit {
+  set-foreground-color(Green);
+  set-style(Bold);
+  print(t);
+  set-style(Normal)
+}
