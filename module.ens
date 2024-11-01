@@ -6,40 +6,40 @@
   },
   dependency {
     core {
-      digest "mEBNoPgc7ML0BoMr3YyeHygIwEOIEgZxzm9CNGiyLiQ",
+      digest "YLwRq225zQEaeo1HtlbWdvs_WwEYk5yYCCtVDo-0oVA",
       mirror [
-        "https://github.com/vekatze/neut-core/raw/main/archive/0-50-28.tar.zst",
+        "https://github.com/vekatze/neut-core/raw/main/archive/0-50-30.tar.zst",
       ],
       enable-preset true,
     },
     socket {
-      digest "hDESKQpXzo8wxSO3kukF2edh39T6CuGYZDGkxslO2dE",
+      digest "2jPsKIR2XYyv2sJ6AVEoz6yTKF704yIreTPlE-C1oMY",
       mirror [
-        "https://github.com/vekatze/socket-nt/raw/main/archive/0-3-18.tar.zst",
+        "https://github.com/vekatze/socket-nt/raw/main/archive/0-3-19.tar.zst",
       ],
     },
     noa {
-      digest "L4y89U8BH0XL2I6nmQ3ODQjyA7HNZb0uTJLFDMqMhUY",
+      digest "K5vHCyOpYYKXa4VfGU_DBYG_3BGLuwAlpqQQIjAcyjk",
       mirror [
-        "https://github.com/vekatze/noa/raw/main/archive/0-3-24.tar.zst",
+        "https://github.com/vekatze/noa/raw/main/archive/0-3-26.tar.zst",
       ],
     },
     zonk {
-      digest "G6R1F7SAiqGb6lFKV4sSTD77yVy1vIuLs1jnG2cTM94",
+      digest "NIhvh7FzFmhteaP2VjahYTFee9J3JKJRSnn7tyryku0",
       mirror [
-        "https://github.com/vekatze/zonk/raw/main/archive/0-1-23.tar.zst",
+        "https://github.com/vekatze/zonk/raw/main/archive/0-1-26.tar.zst",
       ],
     },
     ansi {
-      digest "T-ZxOnUGNg9DeD2SxDGxFLFx6BMr_ayiEkq45e7H-P0",
+      digest "Px2SQZbV57LSsmlXa5VzRn_JdW3lvVKKwqs8jxLgCAU",
       mirror [
-        "https://github.com/vekatze/ansi-terminal/raw/main/archive/0-4-17.tar.zst",
+        "https://github.com/vekatze/ansi-terminal/raw/main/archive/0-4-18.tar.zst",
       ],
     },
     http-base {
-      digest "ALmdI_-dxpbQhfDGFdblorI6uN4O6zOr5wXFPIgWIV4",
+      digest "PpcUvtLik4l964mBBRxtUYPQQdHrXY4b6OzaJmdQBZo",
       mirror [
-        "https://github.com/vekatze/http-base-nt/raw/main/archive/0-1-13.tar.zst",
+        "https://github.com/vekatze/http-base-nt/raw/main/archive/0-1-14.tar.zst",
       ],
     },
   },
