@@ -1,6 +1,6 @@
 import {
-  core.c-string {from-c-string},
-  core.errno {Errno, errno},
+  core.c-int {C-Int, from-c-int},
+  core.errno {Errno, get-error-message},
   core.int.show {show-int},
   http-base.request {request},
   http-base.request.parse.v1-1 {request-parser},
@@ -39,16 +39,6 @@ inline _run(act: (request) -> response): (address: socket-address, text) -> text
   }
 }
 
-foreign {
-  strerror(int): pointer,
-}
-
-define _errno-to-text(e: errno): text {
-  let Errno(i) = e in
-  let c-str = magic external strerror(i) in
-  from-c-string(c-str)
-}
-
 inline serve(s: server): unit {
   let Server of {address, number-of-threads, port, act} = s in
   let server-config =
@@ -56,17 +46,17 @@ inline serve(s: server): unit {
       family = socket.address-family.AF_INET,
       comm-type = SOCK_STREAM,
       reuse-socket = True,
-      protocol = 0,
+      protocol = C-Int(0),
       port,
       address,
-      backlog = 128,
+      backlog = C-Int(128),
       threads = number-of-threads,
       interpreter = _run(act),
     }
   in
   match start-server(server-config) {
   | Left(Errno(i)) =>
-    printf("failed to start a server.\nerror: {} {}\n", [show-int(i), _errno-to-text(Errno(i))])
+    printf("failed to start a server.\nerror: {} {}\n", [show-int(from-c-int(i)), get-error-message(Errno(i))])
   | Right(_) =>
     Unit
   }

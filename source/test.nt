@@ -10,7 +10,7 @@ constant my-server: server {
   Server of {
     address = "0.0.0.0",
     number-of-threads = 10,
-    port = 8000,
+    port = 8080,
     act = {
       function (r: request): response {
         let Request of {body} = r in
