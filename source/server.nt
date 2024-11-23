@@ -1,5 +1,5 @@
 import {
-  core.c-int {C-Int, from-c-int},
+  core.c-int {from-c-int},
   core.errno {Errno, get-error-message},
   core.int.show {show-int},
   http-base.request {request},
@@ -46,10 +46,10 @@ inline serve(s: server): unit {
       family = socket.address-family.AF_INET,
       comm-type = SOCK_STREAM,
       reuse-socket = True,
-      protocol = C-Int(0),
+      protocol = 0,
       port,
       address,
-      backlog = C-Int(128),
+      backlog = 128,
       threads = number-of-threads,
       interpreter = _run(act),
     }
