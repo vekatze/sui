@@ -6,7 +6,7 @@ import {
   this.server {Server, serve, server},
 }
 
-constant my-server: server {
+inline my-server: server {
   Server of {
     address = "0.0.0.0",
     number-of-threads = 10,
