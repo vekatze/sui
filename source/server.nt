@@ -30,10 +30,10 @@ inline _run(act: (request) -> response): (address: socket-address, text) -> text
     printf("{}:{}\n", [ip-address, show-int(magic cast(_, _, port))]);
     pin st = new-state(t) in
     match run(request-parser(), st) {
-    | OK(req) =>
+    | Right(req) =>
       let result = act(req) in
       show-response(result)
-    | Error(_) =>
+    | Left(_) =>
       show-response(text-response(400, *"The server couldn't parse the request\n"))
     }
   }
@@ -55,9 +55,9 @@ inline serve(s: server): unit {
     }
   in
   match start-server(server-config) {
-  | Error(Errno(i)) =>
+  | Left(Errno(i)) =>
     printf("failed to start a server.\nerror: {} {}\n", [show-int(from-c-int(i)), get-error-message(Errno(i))])
-  | OK(_) =>
+  | Right(_) =>
     Unit
   }
 }
