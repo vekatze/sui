@@ -1,7 +1,6 @@
 import {
-  core.c-int {from-c-int},
-  core.errno {Errno, get-error-message},
   core.int.show {show-int},
+  core.system {get-error-message},
   http-base.request {request},
   http-base.request.parse.v1-1 {request-parser},
   http-base.response {response, text-response},
@@ -55,8 +54,8 @@ inline serve(s: server): unit {
     }
   in
   match start-server(server-config) {
-  | Left(Errno(i)) =>
-    printf("failed to start a server.\nerror: {} {}\n", [show-int(from-c-int(i)), get-error-message(Errno(i))])
+  | Left(e) =>
+    printf("failed to start a server.\nerror: {}\n", [get-error-message(e)])
   | Right(_) =>
     Unit
   }
