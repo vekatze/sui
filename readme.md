@@ -3,7 +3,7 @@
 `sui` is an HTTP server for the [Neut](https://vekatze.github.io/neut/) programming language.
 
 ```sh
-neut get sui https://github.com/vekatze/sui/raw/main/archive/0-1-31.tar.zst
+neut get sui https://github.com/vekatze/sui/raw/main/archive/0-1-32.tar.zst
 ```
 
 ## Types
