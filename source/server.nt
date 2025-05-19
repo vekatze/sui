@@ -9,8 +9,7 @@ import {
   socket.socket {Socket-Address, socket-address, start-server},
   socket.socket-type {SOCK_STREAM},
   this.util {_print-green-bold},
-  zonk.parser {run},
-  zonk.state {new-state},
+  zonk.move.make-zonk-kit {make-zonk-kit},
 }
 
 data server {
@@ -27,8 +26,8 @@ inline _run(act: (request) -> response): (address: socket-address, text) -> text
     let Socket-Address of {ip-address, port} = address in
     _print-green-bold("INFO: ");
     printf("{}:{}\n", [ip-address, show-int(magic cast(_, _, port))]);
-    pin st = new-state(t) in
-    match run(request-parser(), st) {
+    pin k = make-zonk-kit(t) in
+    match request-parser(k) {
     | Right(req) =>
       let result = act(req) in
       show-response(result)
